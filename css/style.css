@@ -9,6 +9,8 @@ black: black;
 font-family: 'Open Sans', sans-serif;
 font-family: 'Tajawal', sans-serif;
 */
+
+/* GENERAL ////////////////////////////////////////////////////////////////////*/
 * {
 	box-sizing: border-box;
 }
@@ -41,8 +43,8 @@ h1 {
 	font-size: 34px;
 	color: #4a4c60;
 	letter-spacing: 1px;
-	margin: 100px 0px 00px 0px;
-	padding: 0px 0px 0px 0px;
+	margin: 0;
+	padding: 0;
 	font-weight: 500;
 
 }
@@ -57,9 +59,25 @@ h2 {
 }
 
 main {
-	display: flex;
-	flex-wrap: wrap;
+	display: grid;
+	grid-template-columns: 33% 33% 33%;
+}
 
+.wrapper {
+	max-width: 960px;
+	margin: 0 auto;
+}
+
+/* HEADER ////////////////////////////////////////////////////////////////////*/
+
+header {
+	padding-top: 100px;
+	margin: 0px 20px;
+	display: flex;
+}
+
+header div {
+	width: 90%;
 }
 
 .title {
@@ -68,10 +86,57 @@ main {
 	font-weight: 500;
 }
 
-.wrapper {
-	max-width: 960px;
-	margin: 0 auto;
+.settings {
+	text-align: right;
+	padding-top:10px;
+	padding-right: 20px;
+	width: 10%;
 }
+
+/* TAGS ////////////////////////////////////////////////////////////////////*/
+
+.tags {
+	display: inline-block;
+}
+
+.tags ul {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+.tags li {
+	margin: 5px;
+	padding: 10px;
+	border-radius: 5px;
+	display: inline-block;
+}
+
+.tags a {
+	text-decoration: none;
+}
+
+.red,
+.red a{
+	background-color: #e6c0c0;
+	color: #a28989;
+}
+
+.blue,
+.blue a {
+	background-color: #c0dbe6;
+	color: #9cb4bd;
+}
+
+.green,
+.green a {
+	background-color: #bee2bc;
+	color: #93b791;
+}
+
+
+
+/* ARTICLES ////////////////////////////////////////////////////////////////////*/
 
 .article {
 	flex: 1 1 0;
@@ -114,4 +179,49 @@ main {
 .likes img,
 .share img {
 	vertical-align: middle;
+}
+
+
+/* FOOTER ////////////////////////////////////////////////////////////////////*/
+
+footer {
+	margin: 0px 20px 40px 20px;
+
+}
+
+footer ul {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	float: right;
+	display: inline;
+}
+
+footer li {
+	display: inline;
+}
+
+footer li a {
+	text-decoration: none;
+	color: #7d7d7d;
+	display: inline-block;
+}
+
+footer li a:hover {
+	color: #8b989e;
+	transition: 0.3s color;
+}
+
+/* RESPONSIVE ////////////////////////////////////////////////////////////////////*/
+
+@media screen and (max-width: 800px) {
+	main {
+		grid-template-columns: 50% 50%;
+	}
+}
+
+@media screen and (max-width: 500px) {
+	main {
+		grid-template-columns: 100%;
+	}
 }
