@@ -12,7 +12,7 @@ font-family: 'Tajawal', sans-serif;
 
 /* GENERAL ////////////////////////////////////////////////////////////////////*/
 * {
-	box-sizing: border-box;
+	/*box-sizing: border-box;*/
 }
 
 html {
@@ -58,11 +58,6 @@ h2 {
 	font-weight: 300;
 }
 
-main {
-	display: grid;
-	grid-template-columns: 33% 33% 33%;
-}
-
 .wrapper {
 	max-width: 960px;
 	margin: 0 auto;
@@ -72,7 +67,6 @@ main {
 
 header {
 	padding-top: 100px;
-	margin: 0px 20px;
 	display: flex;
 }
 
@@ -89,14 +83,14 @@ header div {
 .settings {
 	text-align: right;
 	padding-top:10px;
-	padding-right: 20px;
 	width: 10%;
 }
 
 /* TAGS ////////////////////////////////////////////////////////////////////*/
 
 .tags {
-	display: inline-block;
+	display: block;
+	text-decoration: none;
 }
 
 .tags ul {
@@ -107,45 +101,76 @@ header div {
 
 .tags li {
 	margin: 5px;
-	padding: 10px;
-	border-radius: 5px;
+	padding: 10px 10px;
+	border-radius: 3px;
 	display: inline-block;
+	height: 0.8em;
+
 }
 
-.tags a {
-	text-decoration: none;
+.deselectTag {
+	border: 1px solid #ccc;
+	background-color: #eee;
+	color: #ccc;
 }
 
-.red,
-.red a{
-	background-color: #e6c0c0;
-	color: #a28989;
+.selectTag {
+	border: 1px solid #ca585a;
+	background-color: #ff9092;
+	color: #ca585a;
 }
 
-.blue,
-.blue a {
-	background-color: #c0dbe6;
-	color: #9cb4bd;
+.red {
+	border: 1px solid #ca585a;
+	background-color: #ff9092;
+	color: #ca585a;
 }
 
-.green,
-.green a {
-	background-color: #bee2bc;
-	color: #93b791;
+.yellow {
+	background-color: #ffd4a2;
+	border: 1px solid #e4a45a;
+	color: #e4a45a;
 }
 
+.blue {
+	background-color: #8f91f4;
+	border: 1px solid #5f61d4;
+	color: #5f61d4;
+}
+
+.pink {
+	background-color: #fdabcf;
+	border: 1px solid #b55f85;
+	color: #b55f85;
+}
 
 
 /* ARTICLES ////////////////////////////////////////////////////////////////////*/
 
+#makeArticles {
+	padding: 20px;
+	font-size: 30px;
+}
+
+main {
+	max-width: 980px;
+	margin: 0 auto;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	align-items: flex-start;
+	align-content: flex-start;
+}
+
 .article {
-	flex: 1 1 0;
+	margin: 10px;
+	width: 300px;
+	flex-grow: 1;
 	padding: 25px;
 	padding-top: 40px;
 	border-radius: 5px;
 	background-color: white;
 	box-shadow: 5px 5px 0px rgba(0, 0, 0, 0.05);
-	margin: 20px 20px 30px 20px;
 }
 
 .featureimg {
@@ -214,14 +239,4 @@ footer li a:hover {
 
 /* RESPONSIVE ////////////////////////////////////////////////////////////////////*/
 
-@media screen and (max-width: 800px) {
-	main {
-		grid-template-columns: 50% 50%;
-	}
-}
 
-@media screen and (max-width: 500px) {
-	main {
-		grid-template-columns: 100%;
-	}
-}
