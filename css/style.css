@@ -108,40 +108,54 @@ header div {
 
 }
 
-.deselectTag {
+.tag {
 	border: 1px solid #ccc;
 	background-color: #eee;
 	color: #ccc;
 }
 
 .selectTag {
+	/*border: 1px solid #ca585a;
+	background-color: #ff9092;
+	color: #ca585a;*/
+}
+
+.global.selectTag {
 	border: 1px solid #ca585a;
 	background-color: #ff9092;
 	color: #ca585a;
 }
 
-.red {
-	border: 1px solid #ca585a;
-	background-color: #ff9092;
-	color: #ca585a;
-}
-
-.yellow {
+.tech.selectTag {
 	background-color: #ffd4a2;
 	border: 1px solid #e4a45a;
 	color: #e4a45a;
 }
 
-.blue {
+.finance.selectTag {
 	background-color: #8f91f4;
 	border: 1px solid #5f61d4;
 	color: #5f61d4;
 }
 
-.pink {
+.happy.selectTag {
 	background-color: #fdabcf;
 	border: 1px solid #b55f85;
 	color: #b55f85;
+}
+
+.pop.selectTag {
+	background-color: #fdabcf;
+	border: 1px solid #b55f85;
+	color: #b55f85;
+}
+
+.makeArticle {
+	border: 1px solid #ccc;
+	background-color: #eee;
+	color: #aaa;
+	border-radius: 10px;
+	margin: 10px;
 }
 
 
@@ -164,7 +178,7 @@ main {
 
 .article {
 	margin: 10px;
-	width: 300px;
+	width: 200px;
 	flex-grow: 1;
 	padding: 25px;
 	padding-top: 40px;
@@ -210,7 +224,7 @@ main {
 /* FOOTER ////////////////////////////////////////////////////////////////////*/
 
 footer {
-	margin: 0px 20px 40px 20px;
+	margin: 20px 20px 40px 20px;
 
 }
 
@@ -230,6 +244,7 @@ footer li a {
 	text-decoration: none;
 	color: #7d7d7d;
 	display: inline-block;
+	margin: 0px 10px;
 }
 
 footer li a:hover {
