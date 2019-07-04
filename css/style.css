@@ -120,51 +120,54 @@ header div {
 	color: #ca585a;*/
 }
 
-.global.selectTag {
+.global.selectTag,
+.global:hover {
 	border: 1px solid #ca585a;
 	background-color: #ff9092;
 	color: #ca585a;
 }
 
-.tech.selectTag {
+.tech.selectTag,
+.tech:hover {
 	background-color: #ffd4a2;
 	border: 1px solid #e4a45a;
 	color: #e4a45a;
 }
 
-.finance.selectTag {
-	background-color: #8f91f4;
-	border: 1px solid #5f61d4;
-	color: #5f61d4;
+.finance.selectTag,
+.finance:hover {
+	background-color: #a3a5f5;
+	border: 1px solid #797ad8;
+	color: #797ad8;
 }
 
-.happy.selectTag {
+.happy.selectTag,
+.happy:hover {
 	background-color: #fdabcf;
-	border: 1px solid #b55f85;
-	color: #b55f85;
+	border: 1px solid #d67aa2;
+	color: #d67aa2;
 }
 
-.pop.selectTag {
-	background-color: #fdabcf;
-	border: 1px solid #b55f85;
-	color: #b55f85;
+.pop.selectTag,
+.pop:hover {
+	background-color: #98cbff;
+	border: 1px solid #6ba0d6;
+	color: #6ba0d6;
 }
 
 .makeArticle {
 	border: 1px solid #ccc;
 	background-color: #eee;
 	color: #aaa;
-	border-radius: 10px;
-	margin: 10px;
+	font-size: 30px;
+	width: 50px;
+	height: 50px;
+	border-radius: 3px;
+	display: inline-block;
 }
 
 
 /* ARTICLES ////////////////////////////////////////////////////////////////////*/
-
-#makeArticles {
-	padding: 20px;
-	font-size: 30px;
-}
 
 main {
 	max-width: 980px;

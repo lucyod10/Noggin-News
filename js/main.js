@@ -2,7 +2,8 @@
 
 //Select tags, and add them to the tag list
 let tagList = [];
-let tags = document.querySelectorAll(".tags");
+let tags = document.querySelectorAll(".tag");
+console.log(tags);
 for (let i=0; i < tags.length; i++) {
 	tags[i].addEventListener("click", tagSelect);
 }
