@@ -1,0 +1,47 @@
+.wrapper {
+	max-width: 600px;
+	width: 80%;
+	margin: 0 auto;
+	display: block;
+}
+
+.title {
+	display: block;
+}
+
+input,
+textarea {
+	min-width: 100%;
+	font-size: 16px;
+	padding: 10px;
+	box-sizing: border-box;
+	border-radius: 5px;
+}
+
+textarea[name="title"] {
+	min-height: 3em;
+	max-height: 5em;
+}
+
+textarea[name="content"] {
+	height: 15em;
+	min-height: 5em;
+	max-height: 50em;
+}
+
+main {
+	padding-top: 20px;
+	display: block;
+}
+
+main button {
+	font-family: 'Scope One', serif;
+	color: #4a4c60;
+	letter-spacing: 1px;
+	padding: 10px 15px;
+	background-color: #ccc;
+	font-size: 25px;
+	border-radius: 5px;
+	margin: 15px 0 40px auto;
+	display: block;
+}

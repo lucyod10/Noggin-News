@@ -32,7 +32,8 @@ body {
 
 }
 
-p {
+p,
+textarea {
 	line-height: 1.3em;
 	letter-spacing: 1px;
 	font-weight: 400;
@@ -254,7 +255,3 @@ footer li a:hover {
 	color: #8b989e;
 	transition: 0.3s color;
 }
-
-/* RESPONSIVE ////////////////////////////////////////////////////////////////////*/
-
-

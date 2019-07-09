@@ -3,7 +3,6 @@
 //Select tags, and add them to the tag list
 let tagList = [];
 let tags = document.querySelectorAll(".tag");
-console.log(tags);
 for (let i=0; i < tags.length; i++) {
 	tags[i].addEventListener("click", tagSelect);
 }
@@ -82,7 +81,7 @@ function addArticle (t, i, c, ts) {
 	main.appendChild(article);
 }
 
-//have a database full of article objects. 
+//have a database full of article objects.
 const articleDatabase = [];
 const createArticle = function (t, i, c, ts) {
 	let article = {
@@ -103,6 +102,8 @@ function articleFilter () {
 	for (let i = 0; i < articleDatabase.length; i++) {
 		const tags = articleDatabase[i].tags;
 		let add = false;
+		//TODO optiimisation: use a for loop so you can break out of it as soon as a tag is found
+		//you dont to use a bool in this case
 		tagList.forEach(function(tag) {
   			if (tags.includes(tag)) {
   				//add these articles using addArticle()
@@ -184,7 +185,7 @@ function tagsRandom () {
 	while (randomNum1 === randomNum2) {
 		randomNum2 = randomInt(tagsArray.length);
 	}
-	
+
 	let tagsRandom = [tagsArray[randomNum1], tagsArray[randomNum2]];
 	return tagsRandom;
 }
@@ -197,5 +198,44 @@ for (let i=0; i < 10; i++) {
 	createArticle(title(), image(), content(), tagsRandom());
 }
 
+// FIREBASE ///////////////////////////////////////////////////////////////////
+function newUser (ref, name, pw) {
+	db.collection("users").doc(ref).set({
+		name: name,
+		password: pw
+	}).
+	then(function() {
+		console.log("Document written");
+	}).
+	catch(function(error) {
+		console.error("Error writing document: ", error);
+	});
 
 
+
+	db.collection("users").doc(ref).collection("posts").doc("post1").set({
+		title: title(),
+		content: content()
+	}).
+	then(function() {
+		console.log("Document written");
+	}).
+	catch(function(error) {
+		console.error("Error writing document: ", error);
+	});
+}
+
+
+
+
+// db.collection("users").add({
+//     first: "Lucy",
+//     last: "Lovelace",
+//     born: 1815
+// })
+// .then(function(docRef) {
+//     console.log("Document written with ID: ", docRef.id);
+// })
+// .catch(function(error) {
+//     console.error("Error adding document: ", error);
+// });
