@@ -1,10 +1,56 @@
+// HANDLES DOM STATE ///////////////////////////////////////////////////////////
+
+// STATES
+function stateOnboard () {
+	document.querySelector(".onboardState").style.display="block";
+	document.querySelector(".mainState").style.display="none";
+	document.querySelector(".newEntryState").style.display="none";
+	document.querySelector(".headerState").style.display="none";
+	document.querySelector(".footerState").style.display="none";
+}
+
+function stateMain () {
+	document.querySelector(".onboardState").style.display="none";
+	document.querySelector(".mainState").style.display="block";
+	document.querySelector(".newEntryState").style.display="none";
+	document.querySelector(".headerState").style.display="block";
+	document.querySelector(".footerState").style.display="block";
+	clearAddArticleInput();
+}
+
+function stateNewEntry () {
+	document.querySelector(".onboardState").style.display="none";
+	document.querySelector(".mainState").style.display="none";
+	document.querySelector(".newEntryState").style.display="block";
+	document.querySelector(".headerState").style.display="block";
+	document.querySelector(".footerState").style.display="block";
+}
+
+const logoButton = document.querySelector("#logo");
+logoButton.addEventListener("click", function () {
+	stateMain();
+});
+
+// ANON
+document.getElementById("anonLogin").addEventListener("click", function () {
+	stateMain();
+});
+
+
 //TODO make the 150 character collapse after 2 lines, and you can uncollapse it
 
+// TAGS ////////////////////////////////////////////////////////////////////////
 //Select tags, and add them to the tag list
-let tagList = [];
+let tagList = ["global",
+"happy",
+"pop",
+"tech",
+"finance"];
 let tags = document.querySelectorAll(".tag");
 for (let i=0; i < tags.length; i++) {
 	tags[i].addEventListener("click", tagSelect);
+	//automatically select all tags
+	tags[i].classList.add("selectTag");
 }
 
 function tagSelect () {
@@ -28,6 +74,7 @@ function tagSelect () {
 	console.log("taglist length: " + tagList);
 }
 
+// ADD ARTICLES ////////////////////////////////////////////////////////////////
 //create an article
 function addArticle (t, i, c, ts) {
 	const article = document.createElement("article");
@@ -77,27 +124,40 @@ function addArticle (t, i, c, ts) {
 	end.appendChild(likes);
 	end.appendChild(comments);
 	end.appendChild(share);
-	const main = document.querySelector("main");
+	const main = document.querySelector("#articleHolder");
 	main.appendChild(article);
 }
 
 //have a database full of article objects.
-const articleDatabase = [];
+let articleDatabase = [];
 const createArticle = function (t, i, c, ts) {
 	let article = {
 		title: t,
 		img: i,
 		content: c,
 		tags: ts
-	}
-articleDatabase.push(article);
+	};
+	articleDatabase.push(article);
 }
+
+function clearArticlesOnPage () {
+	//clear current ARTICLES
+	const articleHolder = document.querySelector("#articleHolder");
+	while (articleHolder.firstChild) {
+		articleHolder.removeChild(articleHolder.firstChild);
+	}
+}
+
+function clearArticleDatabase () {
+	articleDatabase = [];
+}
+
+const makeArticlesBtn = document.getElementById("makeArticles");
+makeArticlesBtn.addEventListener("click", articleFilter);
 //loop through articledatabase, finding tags for each article inside
-//if tag contains one of the selected tags from tagList
-//addArticle
-//filter the articles to only show articles with matching tags
+//if tag contains one of the selected tags from tagList add it
 function articleFilter () {
-	//TODO make an article object that randomly generates articles and tags
+	clearArticlesOnPage()
 	//filter through article object to find articles with tags matching tagList
 	for (let i = 0; i < articleDatabase.length; i++) {
 		const tags = articleDatabase[i].tags;
@@ -114,12 +174,11 @@ function articleFilter () {
 		});
 
 		if (add === true) {
-			let db = articleDatabase[i];
-			addArticle(db.title, db.img, db.content, db.tags);
-
+			let articledb = articleDatabase[i];
+			console.log(`title: ${articledb.title}`);
+			addArticle(articledb.title, articledb.img, articledb.content, articledb.tags);
 		}
 	}
-
 	//TODO Remove articles on the page that are not in the tag list
 }
 
@@ -178,64 +237,34 @@ function tagsRandom () {
 		"pop",
 		"tech",
 		"finance"
-		]
-
+	];
 	let randomNum1 = randomInt(tagsArray.length);
 	let randomNum2 = randomInt(tagsArray.length);
 	while (randomNum1 === randomNum2) {
 		randomNum2 = randomInt(tagsArray.length);
 	}
-
 	let tagsRandom = [tagsArray[randomNum1], tagsArray[randomNum2]];
 	return tagsRandom;
 }
 
-const makeArticlesBtn = document.getElementById("makeArticles");
-makeArticlesBtn.addEventListener("click", articleFilter);
+// NEW ENTRY /////////////////////////////////////////////////////////////////////
+
+const newEntryButton = document.querySelector("#newentry");
+newEntryButton.addEventListener("click", function () {
+	stateNewEntry();
+});
+
+function clearAddArticleInput () {
+	const t = document.getElementById("title");
+	const c = document.getElementById("content");
+	t.value = "";
+	c.value = "";
+
+}
+
+// ON LOAD /////////////////////////////////////////////////////////////////////
 
 //add 10 random articles to the database
-for (let i=0; i < 10; i++) {
-	createArticle(title(), image(), content(), tagsRandom());
-}
-
-// FIREBASE ///////////////////////////////////////////////////////////////////
-function newUser (ref, name, pw) {
-	db.collection("users").doc(ref).set({
-		name: name,
-		password: pw
-	}).
-	then(function() {
-		console.log("Document written");
-	}).
-	catch(function(error) {
-		console.error("Error writing document: ", error);
-	});
-
-
-
-	db.collection("users").doc(ref).collection("posts").doc("post1").set({
-		title: title(),
-		content: content()
-	}).
-	then(function() {
-		console.log("Document written");
-	}).
-	catch(function(error) {
-		console.error("Error writing document: ", error);
-	});
-}
-
-
-
-
-// db.collection("users").add({
-//     first: "Lucy",
-//     last: "Lovelace",
-//     born: 1815
-// })
-// .then(function(docRef) {
-//     console.log("Document written with ID: ", docRef.id);
-// })
-// .catch(function(error) {
-//     console.error("Error adding document: ", error);
-// });
+// for (let i=0; i < 10; i++) {
+// 	createArticle(title(), image(), content(), tagsRandom());
+// }
