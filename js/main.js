@@ -297,7 +297,11 @@ function clearAddArticleInput () {
 	const c = document.getElementById("content");
 	t.value = "";
 	c.value = "";
-
+	const tag = document.querySelectorAll(".tag");
+	tag.forEach(function(t) {
+		t.classList.remove("selectTag");
+		newEntryTagList = [];
+	});
 }
 
 // ON LOAD /////////////////////////////////////////////////////////////////////

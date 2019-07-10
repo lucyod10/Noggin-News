@@ -133,7 +133,7 @@ const loadDatabase = (data) => {
 			const title = post.title;
 			const content = post.content;
 			const i = image();
-			const t = tagsRandom();
+			const t = post.tags;
 			createArticle(title, i, content, t);
 		});
 	}
