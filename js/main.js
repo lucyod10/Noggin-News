@@ -46,7 +46,7 @@ let tagList = ["global",
 "pop",
 "tech",
 "finance"];
-let tags = document.querySelectorAll(".tag");
+let tags = document.querySelectorAll(".mainState .tag");
 for (let i=0; i < tags.length; i++) {
 	tags[i].addEventListener("click", tagSelect);
 	//automatically select all tags
@@ -248,6 +248,44 @@ function tagsRandom () {
 }
 
 // NEW ENTRY /////////////////////////////////////////////////////////////////////
+
+let newEntryTags = document.querySelectorAll(".newEntryState .tag");
+let newEntryTagList = [];
+for (let i=0; i < newEntryTags.length; i++) {
+	newEntryTags[i].addEventListener("click", newEntryTagSelect);
+}
+
+function newEntryTagSelect () {
+	//alternate the tags, to either select or deselect the tag
+	//event.target.classList.toggle("deselectTag");
+	event.target.classList.toggle("selectTag");
+
+	// get the type of tage, without using id as it is used in the main section.
+	const thisClassList = event.target.classList;
+	let thisClass = "";
+	thisClassList.forEach(function (val) {
+		if (val != "tag" && val != "selectTag") {
+			thisClass = val;
+		}
+	});
+
+
+	//check if the tag has been changed to selects, and if so add it to the array
+	if (event.target.classList.contains("selectTag") === true) {
+		//if the tag has just been selected, then add it to the array
+		//find the class
+		newEntryTagList.push(thisClass);
+	}
+	//if it has just been deselected, then remove it from the array
+	else {
+		let id = thisClass;
+		let index = newEntryTagList.indexOf(thisClass);
+		if (index > -1) {
+			newEntryTagList.splice(index, 1);
+		}
+	}
+	console.log("newEntryTagList length: " + newEntryTagList);
+}
 
 const newEntryButton = document.querySelector("#newentry");
 newEntryButton.addEventListener("click", function () {

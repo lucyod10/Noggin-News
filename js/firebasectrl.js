@@ -142,10 +142,11 @@ const loadDatabase = (data) => {
 	}
 };
 
-const addToDatabase = (userid, title, content) => {
+const addToDatabase = (userid, title, content, tags) => {
 		db.collection("posts").doc(userid).collection("posts").add({
 			title: title,
-			content: content
+			content: content,
+			tags: tags
 		}).
 		then(function() {
 			console.log("Document written");
@@ -166,7 +167,7 @@ function saveNewEntry() {
 		if (user) {
 			console.log("user logged in: " + user);
 			const userid = user.uid;
-			addToDatabase(userid, title, content);
+			addToDatabase(userid, title, content, newEntryTagList);
 			stateMain();
 		}
 		else {
