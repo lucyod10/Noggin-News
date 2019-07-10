@@ -2,7 +2,7 @@
 <html>
 <head>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Noggin News</title>
+	<title>Bloggin</title>
 	<meta charset="utf-8">
 	<link href="https://fonts.googleapis.com/css?family=Tajawal:300,400,500,700&display=swap" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Scope+One&display=swap" rel="stylesheet">
@@ -49,16 +49,24 @@
 		<div class="wrapper">
 			<header>
 				<div id="logo">
-					<h1>Noggin News</h1>
-					<h2>The news source for noggin heads.</h2>
-					<section id="accountDetails">
-						<p>Username: <span id="accountUsername">you</span></p>
-						<p>UID: <span id="accountUserId">uid</span></p>
-					</section>
+					<h1>Bloggin</h1>
+					<h2>Post your thoughts.</h2>
 				</div><!--logo-->
-				<button class="newentry" id="newentry">new entry</button>
-				<button class="logout" id="logout">log out</button>
-				<i class="fas fa-cog settings"></i>
+				<div class="settings">
+					<div>
+						<i id="newentry" class="fas fa-plus"></i>
+						<!-- <button class="newentry" id="newentry">new entry</button> -->
+						<!-- <button class="logout" id="logout">log out</button> -->
+						<i id="logout" class="fas fa-sign-in-alt" alt="Sign Out"></i>
+						<i class="fas fa-cog"></i>
+					</div>
+					<div>
+						<section id="accountDetails">
+							<p><b>Username: </b><span id="accountUsername">you</span></p>
+							<p><b>UID: </b><span id="accountUserId">uid</span></p>
+						</section>
+					</div>
+				</div><!--settings-->
 			</header>
 		</div><!--wrapper-->
 	</div><!--header-->
@@ -80,11 +88,13 @@
 
 			<div class="tags">
 				<ul>
-					<li class="tag global">Global</li>
-					<li class="tag pop">Pop Culture</li>
-					<li class="tag tech">Tech</li>
-					<li class="tag finance">Finance</li>
-					<li class="tag happy">Happy</li>
+					<!-- <li class="tag tagOne">Lifestyle</li>
+					<li class="tag tagTwo">Food</li>
+					<li class="tag tagThree">Fashion</li>
+					<li class="tag tagFour">Tech</li>
+					<li class="tag tagFive">Cats</li>
+					<li class="tag tagSix">Dogs</li>
+					<li class="tag tagSeven">Rant</li> -->
 				</ul>
 			</div><!--tags-->
 
@@ -97,11 +107,13 @@
 		<div class="wrapper">
 			<div class="tags">
 				<ul>
-					<li id="global" class="tag global">Global</li>
-					<li id="pop" class="tag pop">Pop Culture</li>
-					<li id="tech" class="tag tech">Tech</li>
-					<li id="finance" class="tag finance">Finance</li>
-					<li id="happy" class="tag happy">Happy</li>
+					<!-- <li id="tagOne" class="tag tagOne">Lifestyle</li>
+					<li id="tagTwo" class="tag tagTwo">Food</li>
+					<li id="tagThree" class="tag tagThree">Fashion</li>
+					<li id="tagFour" class="tag tagFour">Tech</li>
+					<li id="tagFive" class="tag tagFive">Cats</li>
+					<li id="tagSix" class="tag tagSix">Dogs</li>
+					<li id="tagSeven" class="tag tagSeven">Rant</li> -->
 					<button id="makeArticles" class="makeArticle">+</button>
 				</ul>
 			</div><!--tags-->
@@ -110,8 +122,6 @@
 
 		</main>
 	</div><!--mainState-->
-
-
 
 
 	<div class="wrapper footerState">

@@ -89,11 +89,8 @@ button {
 
 header {
 	padding-top: 100px;
-	display: flex;
-}
-
-header div {
-	width: 90%;
+	display: grid;
+	grid-template-columns: auto auto;
 }
 
 header p {
@@ -111,8 +108,13 @@ header p {
 .settings {
 	text-align: right;
 	padding-top:10px;
-	width: 10%;
 	cursor: pointer;
+	display: grid;
+	grid-template-rows: auto auto;
+}
+
+.settings i {
+	margin: 0px 0.5em;
 }
 
 .headerState .logout {
@@ -151,42 +153,50 @@ header p {
 	cursor: pointer;
 }
 
-.selectTag {
-	/*border: 1px solid #ca585a;
-	background-color: #ff9092;
-	color: #ca585a;*/
-}
-
-.global.selectTag,
-.global:hover {
+.tagOne.selectTag,
+.tagOne:hover {
 	border: 1px solid #ca585a;
 	background-color: #ff9092;
 	color: #ca585a;
 }
 
-.tech.selectTag,
-.tech:hover {
+.tagTwo.selectTag,
+.tagTwo:hover {
 	background-color: #ffd4a2;
 	border: 1px solid #e4a45a;
 	color: #e4a45a;
 }
 
-.finance.selectTag,
-.finance:hover {
+.tagThree.selectTag,
+.tagThree:hover {
 	background-color: #a3a5f5;
 	border: 1px solid #797ad8;
 	color: #797ad8;
 }
 
-.happy.selectTag,
-.happy:hover {
+.tagFour.selectTag,
+.tagFour:hover {
 	background-color: #fdabcf;
 	border: 1px solid #d67aa2;
 	color: #d67aa2;
 }
 
-.pop.selectTag,
-.pop:hover {
+.tagFive.selectTag,
+.tagFive:hover {
+	background-color: #98cbff;
+	border: 1px solid #6ba0d6;
+	color: #6ba0d6;
+}
+
+.tagSix.selectTag,
+.tagSix:hover {
+	background-color: #98cbff;
+	border: 1px solid #6ba0d6;
+	color: #6ba0d6;
+}
+
+.tagSeven.selectTag,
+.tagSeven:hover {
 	background-color: #98cbff;
 	border: 1px solid #6ba0d6;
 	color: #6ba0d6;

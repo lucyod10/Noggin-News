@@ -36,34 +36,65 @@ document.getElementById("anonLogin").addEventListener("click", function () {
 	stateMain();
 });
 
-
-//TODO make the 150 character collapse after 2 lines, and you can uncollapse it
-
 // TAGS ////////////////////////////////////////////////////////////////////////
-//Select tags, and add them to the tag list
-let tagList = ["global",
-"happy",
-"pop",
-"tech",
-"finance"];
-let tags = document.querySelectorAll(".mainState .tag");
-for (let i=0; i < tags.length; i++) {
-	tags[i].addEventListener("click", tagSelect);
-	//automatically select all tags
-	tags[i].classList.add("selectTag");
+
+const globalTagNames = [
+	{ name: "beauty",
+		className: "tagOne"},
+	{ name: "food",
+		className: "tagTwo"},
+	{ name: "fashion",
+		className: "tagThree"},
+	{ name: "tech",
+		className: "tagFour"},
+	{ name: "cats",
+		className: "tagFive"},
+	{ name: "dogs",
+		className: "tagSix"},
+	{ name: "rant",
+		className: "tagSeven"},
+];
+
+//create tag list in main section of document
+for (let i=0; i < globalTagNames.length; i++) {
+	const tagMainUl = document.querySelector(".mainState .tags ul");
+	const newTag = document.createElement("li");
+	newTag.setAttribute("id", globalTagNames[i].className);
+	newTag.setAttribute("class", globalTagNames[i].className);
+	newTag.classList.add("tag");
+	newTag.innerHTML = globalTagNames[i].name;
+	newTag.addEventListener("click", tagSelect);
+	// automatically select all tags on load
+	newTag.classList.add("selectTag");
+	tagMainUl.appendChild(newTag);
 }
 
+let tagList = [
+	"tagOne",
+	"tagTwo",
+	"tagThree",
+	"tagFour",
+	"tagFive",
+	"tagSix",
+	"tagSeven"
+];
+let tags = document.querySelectorAll(".mainState .tag");
+// for (let i=0; i < tags.length; i++) {
+// 	tags[i].addEventListener("click", tagSelect);
+// 	// automatically select all tags on load
+// 	tags[i].classList.add("selectTag");
+// }
+
 function tagSelect () {
-	//alternate the tags, to either select or deselect the tag
-	//event.target.classList.toggle("deselectTag");
+	// change tag button styling
 	event.target.classList.toggle("selectTag");
 
-	//check if the tag has been changed to selects, and if so add it to the array
+	// check if the tag has been changed to selects, and if so add it to the array
 	if (event.target.classList.contains("selectTag") === true) {
-		//if the tag has just been selected, then add it to the array
+		// if the tag has just been selected, then add it to the array
 		tagList.push(event.target.getAttribute("id"));
 	}
-	//if it has just been deselected, then remove it from the array
+	// if it has just been deselected, then remove it from the array
 	else {
 		let id = event.target.getAttribute('id');
 		let index = tagList.indexOf(id);
@@ -75,7 +106,7 @@ function tagSelect () {
 }
 
 // ADD ARTICLES ////////////////////////////////////////////////////////////////
-//create an article
+//create an article on the page
 function addArticle (t, i, c, ts) {
 	const article = document.createElement("article");
 	article.setAttribute("class", "article");
@@ -103,20 +134,27 @@ function addArticle (t, i, c, ts) {
 	share.innerHTML = "<i class='far fa-share-square'></i>";
 	share.setAttribute("class", "share");
 
-	const tags = document.createElement("div");
-	tags.setAttribute("class", "tags");
+	const newTags = document.createElement("div");
+	newTags.setAttribute("class", "tags");
 	const ul = document.createElement("ul");
-	tags.appendChild(ul);
+	newTags.appendChild(ul);
 
 		for (let i=0; i < ts.length; i++) {
 			const tag = document.createElement("li");
 			tag.setAttribute("class", "selectTag");
 			tag.classList.add(ts[i]);
-			tag.innerHTML = ts[i];
-			ul.appendChild(tag);
-	}
+			//change the text of the tag to match the tag objects set in globalTagNames
+			for (let j=0; j < globalTagNames.length; j++) {
+				if (globalTagNames[j].className === ts[i]) {
+					tag.innerHTML = globalTagNames[j].name;
+					break;
+				}
+			}
 
-	article.appendChild(tags);
+			ul.appendChild(tag);
+		}
+
+	article.appendChild(newTags);
 	article.appendChild(title);
 	article.appendChild(img);
 	article.appendChild(caption);
@@ -128,7 +166,7 @@ function addArticle (t, i, c, ts) {
 	main.appendChild(article);
 }
 
-//have a database full of article objects.
+// array full of articles for the current user, populated in firebasectrl using createArticle
 let articleDatabase = [];
 const createArticle = function (t, i, c, ts) {
 	let article = {
@@ -141,7 +179,6 @@ const createArticle = function (t, i, c, ts) {
 }
 
 function clearArticlesOnPage () {
-	//clear current ARTICLES
 	const articleHolder = document.querySelector("#articleHolder");
 	while (articleHolder.firstChild) {
 		articleHolder.removeChild(articleHolder.firstChild);
@@ -154,57 +191,22 @@ function clearArticleDatabase () {
 
 const makeArticlesBtn = document.getElementById("makeArticles");
 makeArticlesBtn.addEventListener("click", articleFilter);
-//loop through articledatabase, finding tags for each article inside
-//if tag contains one of the selected tags from tagList add it
+// loop through articleDatabase, adding any article whose tags match the tags in tagList to the page
 function articleFilter () {
 	clearArticlesOnPage()
-	//filter through article object to find articles with tags matching tagList
+	console.log("article database " + articleDatabase);
 	for (let i = 0; i < articleDatabase.length; i++) {
-		const tags = articleDatabase[i].tags;
-		let add = false;
-		//TODO optiimisation: use a for loop so you can break out of it as soon as a tag is found
-		//you dont to use a bool in this case
-		tagList.forEach(function(tag) {
-  			if (tags.includes(tag)) {
-  				//add these articles using addArticle()
-  				//to check youre not adding the article twice
-  				//dont add here, just change bool
-				add = true;
-			}
-		});
+		const ts = articleDatabase[i].tags;
 
-		if (add === true) {
-			let articledb = articleDatabase[i];
-			console.log(`title: ${articledb.title}`);
-			addArticle(articledb.title, articledb.img, articledb.content, articledb.tags);
+		for (let j=0; j < tagList.length; j++) {
+			if (ts && ts.includes(tagList[j])) {
+				let articledb = articleDatabase[i];
+				addArticle(articledb.title, articledb.img, articledb.content, articledb.tags);
+				// break out of this loop if tag found, to avoid articles with more than one matching tag to be added multiple times
+				break;
+			}
 		}
 	}
-	//TODO Remove articles on the page that are not in the tag list
-}
-
-function randomInt (max) {
-	let randomNum = Math.floor(Math.random() * max);
-	return randomNum;
-}
-
-function title () {
-	const titles = [
-		"Cupcake dragée tiramisu croissant ice cream.",
-		"Liquorice pastry tart I love sugar plum bonbon.",
-		"Tootsie roll pastry liquorice candy canes jelly beans.",
-		"Jelly beans biscuit marzipan tiramisu dessert I love candy canes",
-		"Icing I love I love dessert sugar plum topping.",
-		"Brownie brownie jelly beans pudding cupcake donut",
-		"Apple pie sweet roll cheesecake cupcake sweet pastry.",
-		"Chocolate gummi bears gummi bears sweet gummies macaroon gingerbread",
-		"Apple pie sweet roll cheesecake cupcake sweet pastry.",
-		"Marzipan liquorice carrot cake bear claw.",
-		"Lollipop fruitcake I love tart sweet roll sugar plum marzipan jelly."
-	]
-
-	let randomNum = randomInt(titles.length);
-	let title = titles[randomNum];
-	return title;
 }
 
 function image () {
@@ -214,53 +216,32 @@ function image () {
 	return image;
 }
 
-function content () {
-	const contents = [
-		"Macaroon jelly beans fruitcake danish cake tiramisu donut caramels. Cheesecake I love macaroon apple pie cotton candy soufflé tiramisu lemon drops. Cake pie oat cake pudding muffin. Marzipan macaroon lollipop jelly beans caramels apple pie powder.",
-		"Caramels I love tiramisu danish I love jelly pudding. Danish biscuit cupcake I love cotton candy powder tootsie roll. Danish caramels dessert tootsie roll.",
-		"Pie donut donut donut. Cotton candy gummies gingerbread icing ice cream I love pastry. Soufflé toffee danish I love caramels jelly beans jelly beans dessert cupcake. Soufflé I love lollipop ice cream cotton candy tart sweet.",
-		"Pastry lemon drops tart chocolate cake. Cupcake topping I love macaroon sugar plum. Marshmallow tart toffee carrot cake tart jelly macaroon halvah. Chupa chups I love caramels icing.",
-		"Soufflé macaroon I love I love. Apple pie brownie gummi bears tiramisu sweet roll soufflé fruitcake macaroon. Lollipop gummi bears sweet roll I love sweet roll I love donut marshmallow. Sugar plum jujubes powder pie liquorice chocolate icing.",
-		"Sesame snaps pastry tart. Brownie sugar plum toffee dessert ice cream. Cookie jujubes lollipop pudding wafer biscuit gingerbread bear claw. Toffee tiramisu gummies sesame snaps.",
-		"I love jujubes cookie ice cream ice cream danish macaroon dessert dragée. Croissant pudding sesame snaps wafer I love. Cupcake candy chocolate bar powder dragée sweet. Bear claw chocolate cake jelly sesame snaps."
-		]
-
-	let randomNum = randomInt(contents.length);
-	let content = contents[randomNum];
-	return content;
-}
-
-function tagsRandom () {
-	const tagsArray = [
-		"global",
-		"happy",
-		"pop",
-		"tech",
-		"finance"
-	];
-	let randomNum1 = randomInt(tagsArray.length);
-	let randomNum2 = randomInt(tagsArray.length);
-	while (randomNum1 === randomNum2) {
-		randomNum2 = randomInt(tagsArray.length);
-	}
-	let tagsRandom = [tagsArray[randomNum1], tagsArray[randomNum2]];
-	return tagsRandom;
-}
-
 // NEW ENTRY /////////////////////////////////////////////////////////////////////
 
 let newEntryTags = document.querySelectorAll(".newEntryState .tag");
 let newEntryTagList = [];
-for (let i=0; i < newEntryTags.length; i++) {
-	newEntryTags[i].addEventListener("click", newEntryTagSelect);
+// for (let i=0; i < newEntryTags.length; i++) {
+// 	newEntryTags[i].addEventListener("click", newEntryTagSelect);
+// }
+
+//create tag list in main section of document
+for (let i=0; i < globalTagNames.length; i++) {
+	const tagMainUl = document.querySelector(".newEntryState .tags ul");
+	const newTag = document.createElement("li");
+	newTag.setAttribute("class", globalTagNames[i].className);
+	newTag.classList.add("tag");
+	newTag.innerHTML = globalTagNames[i].name;
+	newTag.addEventListener("click", newEntryTagSelect);
+	// automatically select all tags on load
+	newTag.classList.add("selectTag");
+	tagMainUl.appendChild(newTag);
 }
 
 function newEntryTagSelect () {
-	//alternate the tags, to either select or deselect the tag
-	//event.target.classList.toggle("deselectTag");
+	// change styling of button
 	event.target.classList.toggle("selectTag");
 
-	// get the type of tage, without using id as it is used in the main section.
+	// get the type of tag, without using id as it is used in the main section.
 	const thisClassList = event.target.classList;
 	let thisClass = "";
 	thisClassList.forEach(function (val) {
@@ -269,16 +250,12 @@ function newEntryTagSelect () {
 		}
 	});
 
-
-	//check if the tag has been changed to selects, and if so add it to the array
+	// check if the tag has been changed to selects, and if so add it to the array
 	if (event.target.classList.contains("selectTag") === true) {
-		//if the tag has just been selected, then add it to the array
-		//find the class
 		newEntryTagList.push(thisClass);
 	}
-	//if it has just been deselected, then remove it from the array
+	// or if it has just been deselected, then remove it from the array
 	else {
-		let id = thisClass;
 		let index = newEntryTagList.indexOf(thisClass);
 		if (index > -1) {
 			newEntryTagList.splice(index, 1);
@@ -293,20 +270,11 @@ newEntryButton.addEventListener("click", function () {
 });
 
 function clearAddArticleInput () {
-	const t = document.getElementById("title");
-	const c = document.getElementById("content");
-	t.value = "";
-	c.value = "";
-	const tag = document.querySelectorAll(".tag");
+	const t = document.getElementById("title").value = "";;
+	const c = document.getElementById("content").value = "";;
+	const tag = document.querySelectorAll(".newEntryState .tag");
 	tag.forEach(function(t) {
 		t.classList.remove("selectTag");
 		newEntryTagList = [];
 	});
 }
-
-// ON LOAD /////////////////////////////////////////////////////////////////////
-
-//add 10 random articles to the database
-// for (let i=0; i < 10; i++) {
-// 	createArticle(title(), image(), content(), tagsRandom());
-// }
