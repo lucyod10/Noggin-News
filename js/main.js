@@ -7,6 +7,7 @@ function stateOnboard () {
 	document.querySelector(".newEntryState").style.display="none";
 	document.querySelector(".headerState").style.display="none";
 	document.querySelector(".footerState").style.display="none";
+	errorMessageHide();
 }
 
 function stateMain () {
@@ -16,6 +17,7 @@ function stateMain () {
 	document.querySelector(".headerState").style.display="block";
 	document.querySelector(".footerState").style.display="block";
 	clearAddArticleInput();
+	errorMessageHide();
 }
 
 function stateNewEntry () {
@@ -24,6 +26,18 @@ function stateNewEntry () {
 	document.querySelector(".newEntryState").style.display="block";
 	document.querySelector(".headerState").style.display="block";
 	document.querySelector(".footerState").style.display="block";
+	errorMessageHide();
+}
+
+function errorMessageShow (m) {
+	let e = document.getElementById("errorMsg");
+	e.style.display = "block";
+	e.innerHTML = m;
+}
+
+function errorMessageHide () {
+	let e = document.getElementById("errorMsg");
+	e.style.display = "none";
 }
 
 const logoButton = document.querySelector("#logo");
@@ -193,20 +207,27 @@ const makeArticlesBtn = document.getElementById("makeArticles");
 makeArticlesBtn.addEventListener("click", articleFilter);
 // loop through articleDatabase, adding any article whose tags match the tags in tagList to the page
 function articleFilter () {
-	clearArticlesOnPage()
-	console.log("article database " + articleDatabase);
-	for (let i = 0; i < articleDatabase.length; i++) {
-		const ts = articleDatabase[i].tags;
+	if (articleDatabase.length) {
+		errorMessageHide();
+		clearArticlesOnPage()
+		console.log("article database " + articleDatabase);
+		for (let i = 0; i < articleDatabase.length; i++) {
+			const ts = articleDatabase[i].tags;
 
-		for (let j=0; j < tagList.length; j++) {
-			if (ts && ts.includes(tagList[j])) {
-				let articledb = articleDatabase[i];
-				addArticle(articledb.title, articledb.img, articledb.content, articledb.tags);
-				// break out of this loop if tag found, to avoid articles with more than one matching tag to be added multiple times
-				break;
+			for (let j=0; j < tagList.length; j++) {
+				if (ts && ts.includes(tagList[j])) {
+					let articledb = articleDatabase[i];
+					addArticle(articledb.title, articledb.img, articledb.content, articledb.tags);
+					// break out of this loop if tag found, to avoid articles with more than one matching tag to be added multiple times
+					break;
+				}
 			}
 		}
 	}
+	else {
+		errorMessageShow ("You dont have any articles!");
+	}
+
 }
 
 function image () {

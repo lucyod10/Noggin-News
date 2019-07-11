@@ -8,16 +8,9 @@ This is a simple blog platform I have built using javascript, HTML/CSS, and fire
 
 ## Bugs
 
-- tags on main page not working
 - log in and out when on server (save to incorrect database?)
 - on server, tag stays selected in newArticle section
-- check red errors in console.
-- when anonymous login, disable add button.
-- add in red error message for errors in main
-- tag toggle should give visual indication between hover and selected
-- make save button inactive until all nerEntry inputs have data.
-- article tag copy inconsistent with main tag copy
-- loader after "enter" login 
+- loader after "enter" login
 
 ## TODO
 
@@ -28,14 +21,8 @@ This is a simple blog platform I have built using javascript, HTML/CSS, and fire
   - personal mode, where you only see your own articles, and
   - group mode, where you see all articles.
 
-- settings menu:
-  - new Entry
-  - log Out
-  - my account
-- redesign the reload database button
 - new article- image
-- rename and rebrand the project.
-- newArticle page: input box max-width
-- one column layout
 - add rules to restrict access
 - allow user to create own tags
+
+- settings menu
