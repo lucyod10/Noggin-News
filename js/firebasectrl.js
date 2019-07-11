@@ -227,7 +227,6 @@ auth.onAuthStateChanged(user => {
 		stateMain();
 		accountDetails.style.display = "block";
 		document.getElementById("accountUsername").innerHTML = user.email;
-		document.getElementById("accountUserId").innerHTML = user.uid;
 
 		// onSnapshot pushes every change of database in real time
 		db.collection("posts").doc(user.uid).collection("posts").onSnapshot(snapshot => {

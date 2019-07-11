@@ -217,7 +217,7 @@ function articleFilter () {
 			for (let j=0; j < tagList.length; j++) {
 				if (ts && ts.includes(tagList[j])) {
 					let articledb = articleDatabase[i];
-					addArticle(articledb.title, articledb.img, articledb.content, articledb.tags);
+					addArticle(articledb.title, image(), articledb.content, articledb.tags);
 					// break out of this loop if tag found, to avoid articles with more than one matching tag to be added multiple times
 					break;
 				}
@@ -227,13 +227,33 @@ function articleFilter () {
 	else {
 		errorMessageShow ("You dont have any articles!");
 	}
-
 }
 
+let imageType = "dog";
+document.querySelector(".paw").addEventListener("click", function () {
+	if (imageType === "dog") {
+		imageType = "cat";
+		document.querySelector(".paw").innerHTML = "<img src='images/icon_cat_02.svg' width='50px' height='50px'>";
+	}
+	else if (imageType === "cat") {
+		imageType = "dog";
+		document.querySelector(".paw").innerHTML = "<img src='images/icon_dog_03.svg' width='50px' height='50px'>";
+	}
+
+	articleFilter();
+});
+
 function image () {
-	let randomNumW = Math.floor(Math.random() * 200)+100;
-	let randomNumH = Math.floor(Math.random() * 150)+100;
-	let image = `https://placedog.net/${randomNumW}/${randomNumH}?random`;
+	let randomNumW = Math.floor(Math.random() * 400)+100;
+	let randomNumH = Math.floor(Math.random() * 250)+100;
+	let image = "";
+	if (imageType === "dog") {
+		image = `http://place-puppy.com/${randomNumW}x${randomNumH}`;
+	}
+	else {
+		image = `https://placekitten.com/${randomNumW}/${randomNumH}`;
+	}
+
 	return image;
 }
 
