@@ -233,11 +233,11 @@ let imageType = "dog";
 document.querySelector(".paw").addEventListener("click", function () {
 	if (imageType === "dog") {
 		imageType = "cat";
-		document.querySelector(".paw").innerHTML = "<img src='images/icon_cat_02.svg' width='50px' height='50px'>";
+		document.querySelector(".paw").innerHTML = "<img src='images/icon_dog_03.svg' width='50px' height='50px'>";
 	}
 	else if (imageType === "cat") {
 		imageType = "dog";
-		document.querySelector(".paw").innerHTML = "<img src='images/icon_dog_03.svg' width='50px' height='50px'>";
+		document.querySelector(".paw").innerHTML = "<img src='images/icon_cat_02.svg' width='50px' height='50px'>";
 	}
 
 	articleFilter();
