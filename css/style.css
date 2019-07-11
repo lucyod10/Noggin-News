@@ -108,13 +108,13 @@ header p {
 .settings {
 	text-align: right;
 	padding-top:10px;
-	cursor: pointer;
 	display: grid;
 	grid-template-rows: auto auto;
 }
 
 .settings i {
 	margin: 0px 0.5em;
+	cursor: pointer;
 }
 
 .headerState .logout {
@@ -150,7 +150,6 @@ header p {
 	border: 1px solid #ccc;
 	background-color: #eee;
 	color: #ccc;
-	cursor: pointer;
 }
 
 .tagOne.selectTag {
@@ -235,9 +234,11 @@ main {
 	width: 100%;
 	position: relative;
 	height: auto;
+	max-height: 300px;
 	display: block;
 	margin: 10px 0px 10px 0px;
 	border-radius: 5px;
+	object-fit: cover;
 }
 
 .article p {
