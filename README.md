@@ -9,6 +9,7 @@ This is a simple blog platform I have built using javascript, HTML/CSS, and fire
 - Add blog posts using the add button in menu.
 - Filter what blog posts you see by selecting the 'tags' and pressing refresh
 - Log out using the menu, and change users.
+- toggle between Cat and Dog images by clicking the icon in the top corner
 
 ## Demo
 
@@ -18,7 +19,9 @@ This is a simple blog platform I have built using javascript, HTML/CSS, and fire
 
 ![Login Page Screenshot](images/screenshot_02.png)
 
-![Home Page Screenshot](images/screenshot_01.png)
+![Home Page Screenshot](images/screenshot_combined_02.png)
+
+![Home Page Screenshot](images/screenshot_combined_01.png)
 
 ![New Article Page Screenshot](images/screenshot_03.png)
 
